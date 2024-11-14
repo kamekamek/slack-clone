@@ -3,7 +3,6 @@ import { Send, Smile } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { EmojiPicker } from "./EmojiPicker";
-import { useToast } from "@/hooks/use-toast";
 
 interface MessageInputProps {
   onSendMessage: (content: string) => void;
@@ -18,7 +17,6 @@ export const MessageInput = memo(function MessageInput({
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const emojiButtonRef = useRef<HTMLButtonElement>(null);
-  const { toast } = useToast();
 
   const handleSend = () => {
     if (message.trim()) {
@@ -35,12 +33,6 @@ export const MessageInput = memo(function MessageInput({
     } else if (e.ctrlKey && e.key === "e") {
       e.preventDefault();
       setShowEmojiPicker((prev) => !prev);
-      toast({
-        description: showEmojiPicker 
-          ? "絵文字パネルを閉じました" 
-          : "絵文字パネルを開きました",
-        duration: 2000,
-      });
     }
   };
 
