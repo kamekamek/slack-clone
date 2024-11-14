@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -42,6 +42,9 @@ export function CreateChannelModal({
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>新規チャンネルの作成</DialogTitle>
+          <DialogDescription>
+            新しいチャンネルの名前を入力してください
+          </DialogDescription>
         </DialogHeader>
         <div className="space-y-4 py-4">
           <div className="space-y-2">
@@ -54,6 +57,7 @@ export function CreateChannelModal({
                 setError("");
               }}
               placeholder="例：一般"
+              className="focus:ring-2 focus:ring-primary"
             />
             {error && <p className="text-sm text-red-500">{error}</p>}
           </div>
