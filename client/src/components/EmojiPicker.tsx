@@ -9,8 +9,10 @@ interface EmojiPickerProps {
   triggerRef: React.RefObject<HTMLElement>;
 }
 
-const EmojiPickerBase = forwardRef<any, any>((props, ref) => (
-  <Picker {...props} ref={ref} />
+const EmojiPickerBase = forwardRef<HTMLDivElement, any>((props, ref) => (
+  <div ref={ref}>
+    <Picker {...props} />
+  </div>
 ));
 
 EmojiPickerBase.displayName = "EmojiPickerBase";
@@ -22,12 +24,9 @@ export function EmojiPicker({ onEmojiSelect, onClose, triggerRef }: EmojiPickerP
     elements: {
       reference: triggerRef.current,
     },
-    placement: 'top-start',
+    placement: 'top',
     middleware: [
-      offset({
-        mainAxis: 8,    // Distance from the reference
-        crossAxis: -16  // Horizontal offset
-      }),
+      offset(16),
       flip({
         fallbackAxisSideDirection: "start",
         padding: 8,
@@ -77,7 +76,6 @@ export function EmojiPicker({ onEmojiSelect, onClose, triggerRef }: EmojiPickerP
         top: y ?? 0,
         left: x ?? 0,
         width: "352px",
-        transform: 'translateX(-16px)',
       }}
     >
       <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
