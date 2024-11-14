@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, forwardRef } from "react";
 import { useFloating, offset, flip, shift, autoUpdate } from "@floating-ui/react";
 import data from "@emoji-mart/data/sets/14/native.json";
 import Picker from "@emoji-mart/react";
@@ -9,6 +9,12 @@ interface EmojiPickerProps {
   triggerRef: React.RefObject<HTMLElement>;
 }
 
+const EmojiPickerBase = forwardRef<any, any>((props, ref) => (
+  <Picker {...props} ref={ref} />
+));
+
+EmojiPickerBase.displayName = "EmojiPickerBase";
+
 export function EmojiPicker({ onEmojiSelect, onClose, triggerRef }: EmojiPickerProps) {
   const ref = useRef<HTMLDivElement>(null);
   
@@ -16,10 +22,12 @@ export function EmojiPicker({ onEmojiSelect, onClose, triggerRef }: EmojiPickerP
     elements: {
       reference: triggerRef.current,
     },
+    placement: 'top',
     middleware: [
       offset(8),
       flip({
         fallbackAxisSideDirection: "start",
+        padding: 8
       }),
       shift(),
     ],
@@ -65,7 +73,7 @@ export function EmojiPicker({ onEmojiSelect, onClose, triggerRef }: EmojiPickerP
       }}
     >
       <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-        <Picker
+        <EmojiPickerBase
           ref={refs.setFloating}
           data={data}
           onEmojiSelect={(emoji: any) => onEmojiSelect(emoji.native)}
