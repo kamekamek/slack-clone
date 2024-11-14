@@ -22,14 +22,21 @@ export function EmojiPicker({ onEmojiSelect, onClose, triggerRef }: EmojiPickerP
     elements: {
       reference: triggerRef.current,
     },
-    placement: 'top',
+    placement: 'top-start',
     middleware: [
-      offset(8),
+      offset({
+        mainAxis: 8,    // Distance from the reference
+        crossAxis: -16  // Horizontal offset
+      }),
       flip({
         fallbackAxisSideDirection: "start",
-        padding: 8
+        padding: 8,
+        boundary: document.body
       }),
-      shift(),
+      shift({
+        padding: 8,
+        boundary: document.body
+      }),
     ],
     whileElementsMounted: autoUpdate,
   });
@@ -70,6 +77,7 @@ export function EmojiPicker({ onEmojiSelect, onClose, triggerRef }: EmojiPickerP
         top: y ?? 0,
         left: x ?? 0,
         width: "352px",
+        transform: 'translateX(-16px)',
       }}
     >
       <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
