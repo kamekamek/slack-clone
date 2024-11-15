@@ -27,8 +27,8 @@ export function EmojiPicker({ onEmojiSelect, onClose, triggerRef }: EmojiPickerP
     placement: 'top-start',
     middleware: [
       offset({
-        mainAxis: -320,  // Move picker up significantly
-        crossAxis: -320  // Move picker to the left
+        mainAxis: 50,  // Move picker up significantly
+        crossAxis: 0  // Move picker to the left
       }),
       flip({
         fallbackAxisSideDirection: "start",
