@@ -27,8 +27,8 @@ export function EmojiPicker({ onEmojiSelect, onClose, triggerRef }: EmojiPickerP
     placement: 'top-start',
     middleware: [
       offset({
-        mainAxis: -320,  // Move up significantly
-        crossAxis: -160  // Center horizontally
+        mainAxis: -320,  // Move picker up significantly
+        crossAxis: -320  // Move picker to the left
       }),
       flip({
         fallbackAxisSideDirection: "start",
@@ -79,7 +79,7 @@ export function EmojiPicker({ onEmojiSelect, onClose, triggerRef }: EmojiPickerP
         top: y ?? 0,
         left: x ?? 0,
         width: "352px",
-        transformOrigin: "bottom center"
+        transformOrigin: "bottom left"
       }}
     >
       <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
